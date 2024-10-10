@@ -3,9 +3,15 @@
 Unordered map is a preferred because parallel jobs run concurrently, and the job ids need to be looked up.
 
 ## Build
+
 ```shell
 ln -s ../data/input_few.txt
 ln -s ../data/input_many.txt
+```
+
+## Benchmark
+
+```shell
 ./bin/benchmark_chain
 
 Running ./bin/benchmark_chain                                                                                                            
@@ -27,7 +33,11 @@ BM_vector_many/iterations:1        2.0097e+10 ns   2.0097e+10 ns            1
 BM_map_many/iterations:1            696172154 ns    696133277 ns            1
 BM_unordered_map_many/iterations:1  304046144 ns    304046703 ns            1              
 BM_map_vector_many/iterations:1     288276307 ns    288266421 ns            1
+```
 
+## perf
+
+```shell
 sudo perf stat -B -e cache-references,cache-misses,cycles,instructions,branches,branch-misses,page-faults,cpu-migrations,context-switches ./bin/benchmark_chain --benchmark_filter=BM_vector_many
 
 Running ./bin/benchmark_chain                                                                                                            
