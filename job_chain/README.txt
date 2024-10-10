@@ -1,3 +1,7 @@
+# job_chain
+
+Unordered map is a preferred because parallel jobs run concurrently, and the job ids need to be looked up.
+
 ## Build
 ```shell
 ln -s ../data/input_few.txt
