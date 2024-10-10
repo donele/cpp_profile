@@ -6,8 +6,6 @@
 using namespace std;
 
 void run(TimeSeries* ts) {
-    cout << "testing.." << endl;
-
     for(int i = 0; i < 1000000; ++i) {
         ts->Add(i*3, i);
         for(int j = 0; j < 10; ++j) {
