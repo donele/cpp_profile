@@ -152,6 +152,8 @@ BM_vector/iterations:2  177451436 ns    177002335 ns            2
 ## perf (map)
 
 ```shell
+sudo perf stat -B -e cache-references,cache-misses,cycles,instructions,branches,branch-misses,page-faults,cpu-migrations,context-switches ./bin/benchmark_ts --benchmark_filter=map
+
 Running ./bin/benchmark_ts
 Run on (16 X 3500 MHz CPU s)
 CPU Caches:
@@ -187,6 +189,8 @@ BM_map/iterations:2 1003083254 ns    999097953 ns            2
 ## perf (vector)
 
 ```shell
+sudo perf stat -B -e cache-references,cache-misses,cycles,instructions,branches,branch-misses,page-faults,cpu-migrations,context-switches ./bin/benchmark_ts --benchmark_filter=vector
+
 Running ./bin/benchmark_ts
 Run on (16 X 3500 MHz CPU s)
 CPU Caches:
@@ -219,3 +223,78 @@ BM_vector/iterations:2  228986523 ns    228975772 ns            2
        0.002999000 seconds sys
 ```
 
+## memusage (map)
+
+There are more heap location when map is used, compared to vector.
+
+
+```shell
+memusage ./bin/benchmark_ts --benchmark_filter=map
+
+Memory usage summary: heap total: 104281467, heap peak: 168022, stack peak: 15536
+         total calls   total memory   failed calls                  
+ malloc|    2015894      104280427              0                   
+realloc|          0              0              0  (nomove:0, dec:0, free:0)   
+ calloc|          1           1040              0                   
+   free|    2015880      104202661
+```
+
+## memusage (vector)
+
+
+```shell
+memusage ./bin/benchmark_ts --benchmark_filter=vector
+
+Memory usage summary: heap total: 8402388, heap peak: 148006, stack peak: 15536
+         total calls   total memory   failed calls
+ malloc|      15899        8401348              0
+realloc|          0              0              0  (nomove:0, dec:0, free:0)
+ calloc|          1           1040              0
+   free|      15885        8323582
+```
+
+## valgrind cachegrind (map)
+
+
+```shell
+valgrind --tool=cachegrind --log-file=valgrind_cache_map.log ./bin/benchmark_ts --benchmark_filter=map
+
+==1128752== I   refs:      75,870,229,414
+==1128752== I1  misses:            22,027
+==1128752== LLi misses:             6,448
+==1128752== I1  miss rate:           0.00%
+==1128752== LLi miss rate:           0.00%
+==1128752==
+==1128752== D   refs:      44,712,706,296  (27,023,874,263 rd   + 17,688,832,033 wr)
+==1128752== D1  misses:        29,179,807  (    28,605,592 rd   +        574,215 wr)
+==1128752== LLd misses:            13,615  (         9,887 rd   +          3,728 wr)
+==1128752== D1  miss rate:            0.1% (           0.1%     +            0.0%  )
+==1128752== LLd miss rate:            0.0% (           0.0%     +            0.0%  )
+==1128752==
+==1128752== LL refs:           29,201,834  (    28,627,619 rd   +        574,215 wr)
+==1128752== LL misses:             20,063  (        16,335 rd   +          3,728 wr)
+==1128752== LL miss rate:             0.0% (           0.0%     +            0.0%  )
+```
+
+## valgrind vachegrind (vector)
+
+
+```shell
+valgrind --tool=cachegrind --log-file=valgrind_cache_vector.log ./bin/benchmark_ts --benchmark_filter=vector
+
+==1129656== I   refs:      7,482,520,931
+==1129656== I1  misses:           13,491
+==1129656== LLi misses:            6,384
+==1129656== I1  miss rate:          0.00%
+==1129656== LLi miss rate:          0.00%
+==1129656==
+==1129656== D   refs:      4,271,201,394  (2,850,617,859 rd   + 1,420,583,535 wr)
+==1129656== D1  misses:        1,532,621  (      313,754 rd   +     1,218,867 wr)
+==1129656== LLd misses:           12,844  (        9,832 rd   +         3,012 wr)
+==1129656== D1  miss rate:           0.0% (          0.0%     +           0.1%  )
+==1129656== LLd miss rate:           0.0% (          0.0%     +           0.0%  )
+==1129656==
+==1129656== LL refs:           1,546,112  (      327,245 rd   +     1,218,867 wr)
+==1129656== LL misses:            19,228  (       16,216 rd   +         3,012 wr)
+==1129656== LL miss rate:            0.0% (          0.0%     +           0.0%  )
+```
