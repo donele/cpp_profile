@@ -276,7 +276,7 @@ valgrind --tool=cachegrind --log-file=valgrind_cache_map.log ./bin/benchmark_ts 
 ==1128752== LL miss rate:             0.0% (           0.0%     +            0.0%  )
 ```
 
-## valgrind vachegrind (vector)
+## valgrind cachegrind (vector)
 
 
 ```shell
