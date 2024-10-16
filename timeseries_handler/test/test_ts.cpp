@@ -1,4 +1,4 @@
-#include "scm_timeseries.h"
+#include "timeseries_handler.h"
 #include <gtest/gtest.h>
 
 class XTimeTest : public ::testing::Test

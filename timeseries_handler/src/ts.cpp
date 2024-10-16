@@ -2,7 +2,7 @@
 #include <map>
 #include <vector>
 #include <queue>
-#include <scm_timeseries.h>
+#include <timeseries_handler.h>
 using namespace std;
 
 void run(TimeSeries* ts) {

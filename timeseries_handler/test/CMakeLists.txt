@@ -11,4 +11,4 @@ target_link_libraries(GTest::GTest INTERFACE gtest_main)
 include_directories(include)
 
 add_executable(test_ts test_ts.cpp)
-target_link_libraries(test_ts GTest::GTest scm_timeseries)
+target_link_libraries(test_ts GTest::GTest timeseries_handler)

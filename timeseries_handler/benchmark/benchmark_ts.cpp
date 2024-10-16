@@ -1,6 +1,6 @@
 #include <string>
 #include <benchmark/benchmark.h>
-#include <scm_timeseries.h>
+#include <timeseries_handler.h>
 using namespace std;
 
 static void BM_map(benchmark::State& state) {

@@ -13,4 +13,4 @@ FetchContent_MakeAvailable(googletest)
 FetchContent_MakeAvailable(googlebenchmark)
 
 add_executable(benchmark_ts benchmark_ts.cpp)
-target_link_libraries(benchmark_ts benchmark::benchmark scm_timeseries)
+target_link_libraries(benchmark_ts benchmark::benchmark timeseries_handler)

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(scm_timeseries)
+project(timeseries_handler)
 
 set(BUILD_SHARED_LIBS ON)
 

@@ -1,5 +1,5 @@
-#ifndef __scm_timeseries_h__
-#define __scm_timeseries_h__
+#ifndef __timeseries_handler_h__
+#define __timeseries_handler_h__
 #include <vector>
 #include <map>
 #include <queue>
